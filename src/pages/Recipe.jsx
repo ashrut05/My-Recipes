@@ -8,17 +8,16 @@ function Recipe() {
     let params = useParams();
     const [details, setDetails] = useState({});
     const [activeTab, setActiveTab] = useState("instructions");
-
-    const fetchDetails = async () => {
-        const data = await fetch(
-            `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
-            );
-        const detailData = await data.json();
-        setDetails(detailData);
-        console.log(detailData);
-    };
     
     useEffect(() => {
+        const fetchDetails = async () => {
+            const data = await fetch(
+                `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
+                );
+            const detailData = await data.json();
+            setDetails(detailData);
+            console.log(detailData);
+        };
         fetchDetails();
     }, [params.name]);
     
@@ -74,7 +73,7 @@ const DetailWrapper = styled.div`
         line-height: 2.5rem;
     }
     ul {
-        margin-top: 2rem;
+        margin: 2rem 0rem;
     }
  `;   
 
@@ -84,10 +83,11 @@ const DetailWrapper = styled.div`
     background: white;
     border: 2px solid black;
     margin-right: 2rem;
+    margin-top: 1rem;
     font-weight: 600;
 `
 
 const Info = styled.div`
-    margin-left: 10rem;
+    margin-left: 5rem;
 `
 export default Recipe
